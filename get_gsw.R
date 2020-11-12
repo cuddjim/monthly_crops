@@ -24,10 +24,8 @@ url_list <- lapply(crop_years_list, function(x)
 
 
 # bind all csvs from 2013-14 crop year to present
-gsw_dat <- purrr::map_df(url_list$list_of_crop_years, function(x) read.csv(x, stringsAsFactors = F) %>% 
+gsw_dat <- purrr::map_df(url_list$list_of_crop_years, function(x) read_csv(x) %>% 
                              janitor::clean_names() %>% 
                              mutate(ktonnes = as.numeric(ktonnes),
                                     week_ending_date = as.Date(week_ending_date, format = '%d/%m/%Y')))
-
-
 
