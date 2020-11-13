@@ -32,6 +32,10 @@ download.file(get_product_download_url(23100216),temp)
 
 rail_cls <- read.csv(unz(temp,"23100216.csv"),encoding='UTF-8') %>% 
     mutate(GEO = stringi::stri_trans_general(GEO, "Latin-ASCII")) %>% 
-    janitor::clean_names() %>% dplyr::rename_at(1,~'ref_date')
+    janitor::clean_names() %>% dplyr::rename_at(1,~'ref_date') %>% 
+    filter(railway_carloading_components %in% c('Wheat','Canola','Other cereal grains',
+                                                'Other oil seeds and nuts, other agricultural product',
+                                                'Milled grain production and preparations, bakery products')) %>% 
+    
 
 unlink(temp)
